@@ -1,7 +1,7 @@
 enum Category {
   food('Food', '🍔'),
   transport('Transport', '🚌'),
-  bill('Bill', '🧾'),
+  bills('Bills', '🧾'),
   fun('Fun', '🎉'),
   other('Other', '📦');
 
