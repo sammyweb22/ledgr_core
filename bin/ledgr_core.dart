@@ -1,5 +1,7 @@
-import 'package:ledgr_core/ledgr_core.dart' as ledgr_core;
+import 'package:ledgr_core/ledgr_core.dart';
 
-void main(List<String> arguments) {
-  print('Hello world: ${ledgr_core.calculate()}!');
+void main() {
+  for (final c in Category.values) {
+    print('${c.emoji} ${c.label}');
+  }
 }
