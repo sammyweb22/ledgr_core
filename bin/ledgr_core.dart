@@ -1,7 +1,14 @@
 import 'package:ledgr_core/ledgr_core.dart';
 
 void main() {
-  for (final c in Category.values) {
-    print('${c.emoji} ${c.label}');
-  }
+  final lunch = Expense(
+    id: '1',
+    title: 'Lunch',
+    amountCents: 1250,
+    category: Category.food,
+    date: DateTime.now(),
+  );
+
+  print(lunch);
+  print(lunch.copyWith(amountCents: 1500));
 }
