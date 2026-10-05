@@ -11,4 +11,9 @@ void main() {
 
   print(lunch);
   print(lunch.copyWith(amountCents: 1500));
+
+  final tracker = ExpenseTracker();
+  tracker.add(lunch);
+  print(tracker.expenses.length);
+  print(tracker.expenses);
 }
