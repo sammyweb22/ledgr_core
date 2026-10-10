@@ -1,4 +1,5 @@
 import 'expense.dart';
+import 'category.dart';
 
 class ExpenseTracker {
   final List<Expense> _expenses = [];
@@ -28,5 +29,21 @@ class ExpenseTracker {
     final copy = [..._expenses];
     copy.sort((a, b) => b.date.compareTo(a.date));
     return copy;
+  }
+
+  int totalFor(Category category) {
+    final matching = _expenses.where((e) => e.category == category);
+    return matching.fold<int>(0, (sum, e) => sum + e.amountCents);
+  }
+
+  int totalForMonth(int year, int month) {
+    final matching = _expenses.where(
+      (e) => e.date.year == year && e.date.month == month,
+    );
+    return matching.fold<int>(0, (sum, e) => sum + e.amountCents);
+  }
+
+  Map<Category, int> breakdown() {
+    return {for (final c in Category.values) c: totalFor(c)};
   }
 }
