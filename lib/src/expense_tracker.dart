@@ -6,6 +6,12 @@ class ExpenseTracker {
   List<Expense> get expenses => List.unmodifiable(_expenses);
 
   void add(Expense expense) {
+    if (expense.amountCents <= 0) {
+      throw ArgumentError('Amount must be positive');
+    }
+    if (expense.title.trim().isEmpty) {
+      throw ArgumentError('Title cannot be empty');
+    }
     _expenses.add(expense);
   }
 

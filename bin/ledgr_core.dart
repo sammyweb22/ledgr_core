@@ -33,4 +33,43 @@ void main() {
   print(tracker.remove('2')); // false: already gone
   print(tracker.remove('999')); // false: never existed
   print(tracker.expenses.length); // 1
+
+  tracker.add(
+    Expense(
+      id: '3',
+      title: 'Netflix',
+      amountCents: 1599,
+      category: Category.fun,
+      date: DateTime(2026, 10, 2),
+    ),
+  );
+  tracker.add(
+    Expense(
+      id: '4',
+      title: 'Electricity',
+      amountCents: 4520,
+      category: Category.bills,
+      date: DateTime(2026, 9, 28),
+    ),
+  );
+
+  print(formatCents(tracker.totalFor(Category.food))); // $12.50
+  print(formatCents(tracker.totalForMonth(2026, 9))); // $45.20
+  print(formatCents(305)); // $3.05
+
+  for (final entry in tracker.breakdown().entries) {
+    print('${entry.key.emoji} ${entry.key.label}: ${formatCents(entry.value)}');
+  }
+
+  try {
+    tracker.add(lunch.copyWith(amountCents: -5));
+  } on ArgumentError catch (e) {
+    print('Rejected: ${e.message}'); // Rejected: Amount must be positive
+  }
+
+  try {
+    tracker.add(lunch.copyWith(title: '   '));
+  } on ArgumentError catch (e) {
+    print('Rejected: ${e.message}'); // Rejected: Title cannot be empty
+  }
 }
